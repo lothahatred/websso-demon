@@ -11,7 +11,7 @@ import { SolanaWalletConnectorPlugin } from "@web3auth/solana-wallet-connector-p
 import { DemonAdapter } from "./adapter/demonAdapter";
 
 const clientId =
-  "BOkifWM3IvmiLYn1hwNWesw-hkHSaGs42hVDEo6OK5eVp0GhV_mxCEqCJ9pPh7g8ahVsS9llAaGslBLgevTiReA"; // get from https://dashboard.web3auth.io
+  "BEeqJvS-s0y9BzSUn2rL1QMKeYeduHppYVEuJASOW4Pl6J3DxFQOimG3jI3OwJ-Di0UbC-z497ZDRIHx27q_wvk"; // get from https://dashboard.web3auth.io
 
 function App() {
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
@@ -28,6 +28,11 @@ function App() {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
             chainId: '0x2',
             rpcTarget: "https://api-testnet.renec.foundation:8899",
+            displayName: "Renec testnet",
+            blockExplorer: "https://explorer.renec.foundation/",
+            ticker: "RENEC",
+            tickerName: "RENEC",
+            decimals: 9
           },
           web3AuthNetwork: "cyan",
         });
