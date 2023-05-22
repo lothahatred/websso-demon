@@ -21,31 +21,13 @@ import {
   Web3AuthError,
 } from "@web3auth/base";
 import { BaseSolanaAdapter } from "@web3auth/base-solana-adapter";
-import { IProviderHandlers } from "@web3auth/solana-provider/dist/types/rpc/solanaRpcMiddlewares";
-import BN from "bn.js";
 import { DemonWalletAdapter } from "./demonWalletAdapter";
-import { BaseInjectedProvider } from "./baseInjectedProvider";
+import { DemonInjectedProvider, DemonWallet } from "./providerHandlers";
 
-type DemonWallet = DemonWalletAdapter & {
-  signMessage(
-    data: Uint8Array,
-    display?: "hex" | "utf8"
-  ): Promise<{
-    signature: Uint8Array;
-    publicKey: BN;
-  }>;
-};
-
-export declare class DemonInjectedProvider extends BaseInjectedProvider<DemonWallet> {
-  protected getProviderHandlers(
-    injectedProvider: DemonWallet
-  ): IProviderHandlers;
-}
-
-export type SolflareWalletOptions = BaseAdapterSettings;
+export type DemonWalletOptions = BaseAdapterSettings;
 
 export class DemonAdapter extends BaseSolanaAdapter<void> {
-  readonly name: string = WALLET_ADAPTERS.COINBASE;
+  readonly name: string = 'DEMON';
 
   readonly adapterNamespace: AdapterNamespaceType = ADAPTER_NAMESPACES.SOLANA;
 
@@ -79,8 +61,9 @@ export class DemonAdapter extends BaseSolanaAdapter<void> {
     this.demonProvider = new DemonInjectedProvider({
       config: { chainConfig: this.chainConfig as CustomChainConfig },
     });
+    console.log(' this.demonProvider',  this.demonProvider);
     this.status = ADAPTER_STATUS.READY;
-    this.emit(ADAPTER_EVENTS.READY, WALLET_ADAPTERS.SOLFLARE);
+    this.emit(ADAPTER_EVENTS.READY, 'DEMON');
 
     try {
       log.debug("initializing demon adapter");
@@ -99,7 +82,7 @@ export class DemonAdapter extends BaseSolanaAdapter<void> {
       super.checkConnectionRequirements();
       this.status = ADAPTER_STATUS.CONNECTING;
       this.emit(ADAPTER_EVENTS.CONNECTING, {
-        adapter: WALLET_ADAPTERS.SOLFLARE,
+        adapter: 'DEMON',
       });
       let cluster: Cluster = "mainnet-beta";
       if (this.chainConfig?.chainId === "0x1") {
@@ -197,7 +180,7 @@ export class DemonAdapter extends BaseSolanaAdapter<void> {
     await this.demonProvider.setupProvider(injectedProvider);
     this.status = ADAPTER_STATUS.CONNECTED;
     this.emit(ADAPTER_EVENTS.CONNECTED, {
-      adapter: WALLET_ADAPTERS.SOLFLARE,
+      adapter: 'DEMON',
       reconnected: this.rehydrated,
     } as CONNECTED_EVENT_DATA);
     return this.provider;

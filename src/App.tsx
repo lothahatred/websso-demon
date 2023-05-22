@@ -28,8 +28,8 @@ function App() {
           clientId,
           chainConfig: {
             chainNamespace: CHAIN_NAMESPACES.SOLANA,
-            chainId: '0x3',
-            rpcTarget: "https://api.devnet.solana.com",
+            chainId: '0x2',
+            rpcTarget: "https://api-testnet.renec.foundation:8899",
           },
           web3AuthNetwork: "cyan",
         });
@@ -52,24 +52,33 @@ function App() {
         });
         await web3auth.addPlugin(torusPlugin);
 
-        const solflareAdapter = new SolflareAdapter({
-          clientId,
-        });
-        web3auth.configureAdapter(solflareAdapter);
-
-        const slopeAdapter = new SlopeAdapter({
-          clientId,
-        });
-        web3auth.configureAdapter(slopeAdapter);
-
-        // const demonAdapter = new DemonAdapter({
+        // const solflareAdapter = new SolflareAdapter({
         //   clientId,
         // });
-        // web3auth.configureAdapter(demonAdapter);
+        // web3auth.configureAdapter(solflareAdapter);
+
+        // const slopeAdapter = new SlopeAdapter({
+        //   clientId,
+        // });
+        // web3auth.configureAdapter(slopeAdapter);
+
+        const demonAdapter = new DemonAdapter({
+          clientId,
+        });
+        web3auth.configureAdapter(demonAdapter);
 
         setWeb3auth(web3auth);
 
-        await web3auth.initModal();
+        await web3auth.initModal({
+          modalConfig: {
+            'DEMON': {
+              label: "DEMON",
+              showOnModal: true,
+              showOnMobile: true,
+              showOnDesktop: true,
+            }
+          }
+        });
         if (web3auth.provider) {
           setProvider(web3auth.provider);
         }
