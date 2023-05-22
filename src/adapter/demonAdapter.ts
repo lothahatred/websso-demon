@@ -16,7 +16,6 @@ import {
   log,
   SafeEventEmitterProvider,
   UserInfo,
-  WALLET_ADAPTERS,
   WalletLoginError,
   Web3AuthError,
 } from "@web3auth/base";

@@ -8,8 +8,6 @@ import "./App.css";
 import { SolanaWalletConnectorPlugin } from "@web3auth/solana-wallet-connector-plugin";
 
 // Adapters
-import { SolflareAdapter } from "@web3auth/solflare-adapter";
-import { SlopeAdapter } from "@web3auth/slope-adapter";
 import { DemonAdapter } from "./adapter/demonAdapter";
 
 const clientId =
