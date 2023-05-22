@@ -11,7 +11,7 @@ import { SolanaWalletConnectorPlugin } from "@web3auth/solana-wallet-connector-p
 import { DemonAdapter } from "./adapter/demonAdapter";
 
 const clientId =
-  "BIXiu65x7q6PppI3yBc6pJR3ELwb5in8waxgmtAB5Lewoh23BzbZEQ8tvWDyowp59FpkrmiLboSKKkQ0SbbeqSE"; // get from https://dashboard.web3auth.io
+  "BOkifWM3IvmiLYn1hwNWesw-hkHSaGs42hVDEo6OK5eVp0GhV_mxCEqCJ9pPh7g8ahVsS9llAaGslBLgevTiReA"; // get from https://dashboard.web3auth.io
 
 function App() {
   const [web3auth, setWeb3auth] = useState<Web3Auth | null>(null);
